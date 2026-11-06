@@ -1,0 +1,6 @@
+{
+  "name": "with-editor",
+  "description": "E8 as the $EDITOR of the programs it runs, as git commit's, after with-editor.el",
+  "e8": "0.3.1",
+  "requires": {}
+}
