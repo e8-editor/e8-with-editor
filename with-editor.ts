@@ -38,7 +38,9 @@ e8.defineVariable({
 });
 
 /** The editor's process id in each buffer it asked to have edited, to signal when done. */
-const pids = new PerBuffer<{ pid: number; window: number }>();
+/** A window as the E8 running gives one: an object, or in E8 0.5.8 and before a number. */
+type Win = ReturnType<typeof e8.selectedWindow>;
+const pids = new PerBuffer<{ pid: number; window: Win }>();
 
 /** The environment that makes E8 a program's editor, for makeProcess's env, as with-editor-export-editor. */
 export function withEditorEnv(): { [name: string]: string } {
