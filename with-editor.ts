@@ -37,6 +37,9 @@ e8.defineVariable({
   value: [],
 });
 
+/** A process as the E8 running gives one: an object, or in E8 0.5.8 and before its name. */
+export type Proc = ReturnType<typeof e8.makeProcess>;
+
 /** The editor's process id in each buffer it asked to have edited, to signal when done. */
 /** A window as the E8 running gives one: an object, or in E8 0.5.8 and before a number. */
 type Win = ReturnType<typeof e8.selectedWindow>;
@@ -52,7 +55,7 @@ export function withEditorEnv(): { [name: string]: string } {
  * passes the rest of the output on to NEXT, as
  * with-editor-sleeping-editor-filter: output a line at a time.
  */
-export function withEditorFilter(next?: (process: string, output: string) => void): (process: string, output: string) => void {
+export function withEditorFilter(next?: (process: Proc, output: string) => void): (process: Proc, output: string) => void {
   let incomplete = "";
   return (process, output) => {
     const text = incomplete + output;
