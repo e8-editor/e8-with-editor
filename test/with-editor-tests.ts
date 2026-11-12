@@ -8,7 +8,7 @@
 // `make test` runs them in e8 --batch, as CI does.
 
 import { ertDeftest, should, shouldEqual, shouldError } from "ert";
-import { withEditorEnv, withEditorFilter, withEditorP } from "with-editor";
+import { type Proc, withEditorEnv, withEditorFilter, withEditorP } from "with-editor";
 
 /** A file to edit, in a directory of its own, holding TEXT. */
 function tempFile(text: string): { dir: string; file: string } {
@@ -28,7 +28,7 @@ function settle(done: () => boolean): void {
  * with-editor's environment and filter, and waits for E8 to visit the
  * file. Gives the process and what it printed besides the request.
  */
-function edit(dir: string, args: string[]): { process: string; output: string[] } {
+function edit(dir: string, args: string[]): { process: Proc; output: string[] } {
   const output: string[] = [];
   const process = e8.makeProcess({
     name: "with-editor-test",
@@ -44,7 +44,7 @@ function edit(dir: string, args: string[]): { process: string; output: string[] 
 }
 
 /** Waits for the program to finish, and gives its output. */
-function finished(run: { process: string; output: string[] }): string {
+function finished(run: { process: Proc; output: string[] }): string {
   settle(() => run.output.join("").includes("status"));
   return run.output.join("").trim();
 }
@@ -149,11 +149,13 @@ ertDeftest("with-editor-file-modes-set-the-major-mode", () => {
 ertDeftest("with-editor-the-filter-passes-on-the-rest-a-line-at-a-time", () => {
   const passed: string[] = [];
   const filter = withEditorFilter((_, text) => void passed.push(text));
-  filter("p", "first li");
+  // The filter only passes its process on: a stand-in will do.
+  const p = "p" as unknown as Proc;
+  filter(p, "first li");
   shouldEqual(passed, [], "half a line waits for the rest");
-  filter("p", "ne\nsecond line\nthird");
+  filter(p, "ne\nsecond line\nthird");
   shouldEqual(passed, ["first line\nsecond line\n"]);
-  filter("p", "\nWITH-EDITOR: 1 OPEN");
+  filter(p, "\nWITH-EDITOR: 1 OPEN");
   shouldEqual(passed, ["first line\nsecond line\n", "third\n"]);
 });
 
