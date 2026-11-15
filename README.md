@@ -1,6 +1,13 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/e8-editor/e8/main/docs/assets/banner-ports-dark.png">
+  <img alt="E8 package ports" src="https://raw.githubusercontent.com/e8-editor/e8/main/docs/assets/banner-ports-light.png">
+</picture>
+
+Part of the [E8 package ports](https://github.com/e8-editor/e8#packages): Emacs packages ported to [E8](https://github.com/e8-editor/e8) and maintained with it. This is a port of [with-editor](https://github.com/magit/with-editor) 3.4.6 by Jonas Bernoulli and [its contributors](https://github.com/magit/with-editor/graphs/contributors). The design and the original code are theirs; the port keeps upstream's licence, the GNU General Public License version 3 or later.
+
 # e8-with-editor
 
-E8 as the editor of the programs it runs, for [E8](https://github.com/e8-editor/e8): when a program such as `git commit` or `git rebase -i` started from E8 wants its `$EDITOR`, E8 visits the file in `with-editor-mode`, `C-c C-c` saves it and lets the program go on, and `C-c C-k` cancels. [e8-magit](https://github.com/e8-editor/e8-magit) writes commit messages and rebase todo lists this way. A port of with-editor.el 3.4.6.
+E8 as the editor of the programs it runs, for [E8](https://github.com/e8-editor/e8): when a program such as `git commit` or `git rebase -i` started from E8 wants its `$EDITOR`, E8 visits the file in `with-editor-mode`, `C-c C-c` saves it and lets the program go on, and `C-c C-k` cancels. [e8-magit](https://github.com/e8-editor/e8-magit) writes commit messages and rebase todo lists this way.
 
 ## Installing
 
@@ -48,7 +55,7 @@ In the file's buffer:
 
 ## Credit
 
-This is a port to E8 of [with-editor](https://github.com/magit/with-editor) 3.4.6, by Jonas Bernoulli and [its contributors](https://github.com/magit/with-editor/graphs/contributors), copyright The Magit Project Contributors, and distributed in NonGNU ELPA and MELPA, under the GNU General Public License version 3 or later. It is not the upstream authors' work as published, and they do not endorse it: report problems with the port here, not upstream.
+with-editor 3.4.6 is copyright The Magit Project Contributors and distributed in NonGNU ELPA and MELPA, under the GNU General Public License version 3 or later. This port is not the upstream authors' work as published, and they do not endorse it: report problems with the port here, not upstream.
 
 ## Developing
 
