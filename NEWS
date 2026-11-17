@@ -1,0 +1,39 @@
+with-editor NEWS -- history of user-visible changes.
+
+This is the news of e8-with-editor, the E8 port of with-editor.  'C-h P'
+shows it under the package's description.
+
+
+* Changes in with-editor 0.2.0
+
+** with-editor works with windows and processes as objects.
+E8 0.5.8 gives scripts numbers for windows and names for processes,
+and later releases objects, as Emacs does; with-editor works with both.
+
+** 'Proc', exported, types the process 'withEditorFilter' passes on.
+
+
+* Changes in with-editor 0.1.0
+
+This is the first release, a port of with-editor 3.4.6.
+
+** Programs E8 starts can use E8 as their '$EDITOR'.
+'withEditorEnv()' sets 'EDITOR', 'VISUAL', 'GIT_EDITOR' and
+'GIT_SEQUENCE_EDITOR' to with-editor's sleeping editor.
+
+** 'withEditorFilter' visits the file a program asks to have edited.
+An editor started with '+LINE FILE' puts point on that line.
+
+** The file is visited in 'with-editor-mode'.
+
+** 'C-c C-c' ('with-editor-finish') saves the file and lets it go on.
+
+** 'C-c C-k' ('with-editor-cancel') tells the program it was cancelled.
+
+** 'with-editor-file-modes' gives the major mode for files by name.
+
+** Hooks run when a file is visited, finished and cancelled.
+They are 'with-editor-filter-visit-hook', 'with-editor-post-finish-hook'
+and 'with-editor-post-cancel-hook'.
+
+** 'withEditorP()' says whether a program waits for the current buffer.
